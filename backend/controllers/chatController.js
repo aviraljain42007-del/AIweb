@@ -1,0 +1,27 @@
+const asyncHandler = require("../utils/asyncHandler");
+const { sendMessageService } = require("../services/chatService");
+
+const sendMessage = asyncHandler(async (req, res) => {
+  const { conversationId } = req.params;
+  const { prompt, mode } = req.body;
+
+  const { conversation, assistantMessage } = await sendMessageService({
+    userId: req.user._id,
+    conversationId,
+    prompt,
+    mode,
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "AI response generated successfully",
+    data: {
+      conversation,
+      assistantMessage,
+    },
+  });
+});
+
+module.exports = {
+  sendMessage,
+};
