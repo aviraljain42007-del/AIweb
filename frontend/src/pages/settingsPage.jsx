@@ -66,7 +66,7 @@ const SettingsPage = () => {
       <div className="settings-card">
         <h1>Custom Instructions</h1>
         <p className="settings-subtitle">
-          Tell DevStudy AI how it should help you.
+          Tell CodeSaarthi how it should help you.
         </p>
 
         {settingsError && <p className="error-text">{settingsError}</p>}

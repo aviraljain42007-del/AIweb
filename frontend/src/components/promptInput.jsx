@@ -126,7 +126,7 @@ const PromptInput = () => {
         <textarea
           ref={inputRef}
           className="prompt-input"
-          placeholder="Ask DevStudy AI..."
+          placeholder="Ask CodeSaarthi..."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           onKeyDown={handleKeyDown}

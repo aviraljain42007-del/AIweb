@@ -57,7 +57,7 @@ const ChatWindow = () => {
     return (
       <main className="chat-window">
         <div className="welcome-box">
-          <h1>DevStudy AI</h1>
+          <h1>CodeSaarthi</h1>
           <p>Create a new chat to start learning.</p>
           <p className="empty-text">
             Use it for code explanation, summaries, interview prep, and MERN doubts.

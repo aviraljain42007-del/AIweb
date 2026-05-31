@@ -7,7 +7,7 @@ const MessageBubble = ({ message }) => {
 
   return (
     <div className={isUser ? "message message-user" : "message message-assistant"}>
-      <strong>{isUser ? "You" : "DevStudy AI"}</strong>
+      <strong>{isUser ? "You" : "CodeSaarthi"}</strong>
 
       {isUser ? (
         <p className="user-message-text">{message.content}</p>

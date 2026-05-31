@@ -33,44 +33,47 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h1>Register</h1>
+        <p>Create your CodeSaarthi account.</p>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          name="name"
-          type="text"
-          placeholder="Enter name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            name="name"
+            type="text"
+            placeholder="Enter name"
+            value={formData.name}
+            onChange={handleChange}
+          />
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Enter email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+          <input
+            name="email"
+            type="email"
+            placeholder="Enter email"
+            value={formData.email}
+            onChange={handleChange}
+          />
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Enter password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            value={formData.password}
+            onChange={handleChange}
+          />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating account..." : "Register"}
-        </button>
-      </form>
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating account..." : "Register"}
+          </button>
+        </form>
 
-      <p>
-        Already have account? <Link to="/login">Login</Link>
-      </p>
+        <p>
+          Already have account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };
