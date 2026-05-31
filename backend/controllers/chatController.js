@@ -1,7 +1,7 @@
 const asyncHandler = require("../utils/asyncHandler");
-const { sendMessageService } = require("../services/chatService");
+const { sendMessageService , streamMessageService } = require("../services/chatService");
 
-const sendMessage = asyncHandler(async (req, res) => {
+exports.sendMessage = asyncHandler(async (req, res) => {
   const { conversationId } = req.params;
   const { prompt, mode } = req.body;
 
@@ -22,6 +22,20 @@ const sendMessage = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = {
-  sendMessage,
-};
+exports.streamMessage = asyncHandler(async (req, res) => {
+  const { conversationId } = req.params;
+  const { prompt, mode } = req.body;
+
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+
+  await streamMessageService({
+    userId: req.user._id,
+    conversationId,
+    prompt,
+    mode,
+    res,
+  });
+});
+

@@ -8,12 +8,13 @@ const {
   getCurrentUser,
 } = require("../controllers/authController");
 
-const { protect } = require("../middlewares/auth.middleware");
+const { protect } = require("../middlewares/authMiddleware");
+const { authRateLimiter } = require("../middlewares/rateLimitMiddleware");
 
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
+router.post("/register", authRateLimiter, registerUser);
+router.post("/login", authRateLimiter, loginUser);
 router.post("/logout", protect, logoutUser);
 router.post("/refresh-token", refreshAccessToken);
 router.get("/me", protect, getCurrentUser);

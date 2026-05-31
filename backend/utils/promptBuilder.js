@@ -1,13 +1,12 @@
 const systemPrompts = {
   normal: `
 You are DevStudy AI, a helpful AI study and developer assistant.
-Explain clearly in Hinglish when the user asks technical topics.
-Give step-by-step explanation with examples.
+Explain clearly and practically.
 `,
 
   code_explainer: `
 You are DevStudy AI in Code Explainer mode.
-Explain the code step by step in Hinglish.
+Explain the code step by step.
 Cover:
 1. What the code does
 2. Line-by-line logic
@@ -35,12 +34,40 @@ Explain weak points and give ideal answers.
 
 const allowedModes = Object.keys(systemPrompts);
 
-const buildGroqMessages = ({ mode = "normal", conversationMessages = [], prompt }) => {
+const buildCustomInstructionText = (customInstructions = {}) => {
+  const preferredLanguage =
+    customInstructions.preferredLanguage || "Hinglish";
+
+  const learningGoal = customInstructions.learningGoal || "";
+
+  const responseStyle =
+    customInstructions.responseStyle || "Step-by-step explanation";
+
+  return `
+User preferences:
+- Preferred language: ${preferredLanguage}
+- Learning goal: ${learningGoal || "Not specified"}
+- Response style: ${responseStyle}
+
+Follow these preferences unless the user's latest request says otherwise.
+`;
+};
+
+const buildGroqMessages = ({
+  mode = "normal",
+  conversationMessages = [],
+  prompt,
+  customInstructions = {},
+}) => {
   const selectedMode = allowedModes.includes(mode) ? mode : "normal";
 
   const systemMessage = {
     role: "system",
-    content: systemPrompts[selectedMode],
+    content: `
+${systemPrompts[selectedMode]}
+
+${buildCustomInstructionText(customInstructions)}
+`,
   };
 
   const historyMessages = conversationMessages

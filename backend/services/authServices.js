@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
+const User = require("../models/user");
 const ApiError = require("../utils/apiError");
 
 const generateAccessAndRefreshTokens = async (userId) => {
@@ -25,6 +25,7 @@ const registerUserService = async ({ name, email, password }) => {
 
   const existingUser = await User.findOne({ email });
 
+
   if (existingUser) {
     throw new ApiError(409, "User already exists with this email");
   }
@@ -34,6 +35,8 @@ const registerUserService = async ({ name, email, password }) => {
     email,
     password,
   });
+
+  console.log("Newly registered user:", user);
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
     user._id

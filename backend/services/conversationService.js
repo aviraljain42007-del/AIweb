@@ -1,4 +1,4 @@
-const Conversation = require("../models/conversation.model");
+const Conversation = require("../models/conversation");
 const ApiError = require("../utils/ApiError");
 
 const allowedModes = ["normal", "code_explainer", "summarizer", "interview_helper"];
